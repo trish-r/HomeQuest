@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeQuest - Sell Medicines</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="script/angular.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #f9f9f9, #eaeaea);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #title1 {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            margin-top: 20px;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #0056b3, #004a9b);
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 15px 0;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #wait {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img alt="." src="" width="50" height="45"> HomeQuest
+            </a>
+            <button class="btn btn-danger" id="logout">Log Out</button>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <div class="container mt-4">
+        <div id="title1">
+            <h3>Sell or List Properties</h3>
+        </div>
+
+        <div class="card p-4">
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" id="hdn" name="hdn">
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="txtEmail" class="form-label">Email Id</label>
+                        <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="Email Id"
+                            readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="txtAddress" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="txtAddress" name="txtAddress" placeholder="Address">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="txtProperty" class="form-label">Type Of Property</label>
+                        <input type="text" class="form-control" id="txtProperty" name="txtProperty"
+                            placeholder="Propert Type">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="txtPrice" class="form-label">Price </label>
+                        <input type="number" class="form-control" id="txtPrice" name="txtPrice" placeholder="Price Rs">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="txtCity" class="form-label">City</label>
+                        <input type="text" class="form-control" id="txtCity" name="txtCity" placeholder="Enter City">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="txtRent" class="form-label">Rent Type</label>
+                        <select class="form-select" id="txtRent" name="txtRent">
+                            <option selected>Select</option>
+                            <option value="Sell">Sell</option>
+                            <option value="Rent">Rent</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="txtBeds" class="form-label">Beds </label>
+                        <input type="number" class="form-control" id="txtBeds" name="txtBeds"
+                            placeholder="No. of Bedrooms">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="txtBath" class="form-label">Bath </label>
+                        <input type="number" class="form-control" id="txtBath" name="txtBath"
+                            placeholder="No. of Bathrooms">
+                    </div>
+                </div>
+                <div class=" mb-3 col-md-5">
+                    <label for="exampleInputEmail1" class="form-label">Upload Proof</label>
+                    <input type="file" onchange="doPrev(this,imgPrev)" id="ppic" name="ppic" accept="image/*">
+
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" id="avail" class="btn btn-primary" formaction="/submit-property">Avail</button>
+                    <span id="avail-submit" class="text-muted">*</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 HomeQuest. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+           // Handle logout
+            $("#logout").click(function () {
+                localStorage.removeItem("activeKuch");
+                location.href = "index.html";
+            });
+
+            // Set active user
+            var activeUser = localStorage.getItem("activeKuch");
+            if (activeUser) {
+                $("#txtEmail").val(activeUser).prop("readonly", true);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

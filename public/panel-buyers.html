@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="script/angular.min.js"></script>
+    <script>
+        var module=angular.module("myModule",[]);
+        module.controller("myController",function($scope,$http){
+                
+
+
+                
+                //===============
+                
+                //==============
+               
+                //=================
+                $scope.jsonArray;
+                $scope.needysrecord=function()
+                {
+                    var url="/get-angular-needys-records";
+                    $http.get(url).then(done,fail);
+                    function done(response)
+                        {
+                            // alert(JSON.stringify(response.data));
+                            $scope.jsonArray=response.data;
+
+                        }
+                     function fail(response)
+                        {
+                                alert(response.data);
+                        }   
+                }
+                
+        })
+    </script>
+    <script>
+        $(document).ready(function()
+        {
+            $("#btn").dblclick(function()
+            {
+                $("#t1").fadeToggle(1000);
+            })
+
+            
+        })
+    </script>
+    <style>
+        body{
+            background-color: black;
+           
+
+        }
+        #t1
+        {
+            width: 1500px;
+        
+        }
+    </style>
+</head>
+<body ng-app="myModule" ng-controller="myController">
+     <center>  
+        <br>
+        <button type="button" class="btn btn-warning" ng-click="needysrecord();" value="needysrecord" id="btn">Show All Buyers</button>
+        
+         <br><br>
+         <table class="table table-hover table-warning" id="t1" >
+                <tr >
+                    <th>Sr.No</th> 
+                    <th>Email id</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>City</th> 
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    
+                    <th>Pic Name</th>
+                    <th>Profile Pic</th>
+                    
+                    <tr ng-repeat="obj in jsonArray" >
+                        <td>{{$index+1}}</td>
+                        <td>{{obj.emailid}}</td>
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.contact}}</td>
+                        <td>{{obj.address}}</td>
+                        <td>{{obj.city}}</td>
+                        <td>{{obj.dob}}</td>
+                        <td>{{obj.gender}}</td>
+                        
+                        <td>{{obj.fileName}}</td>
+                        
+                        <td align="center">
+                            <img src="upload/{{obj.fileName}}" alt="" width="100" height="100">
+                        </td>
+                        
+                        
+                    </tr>
+                </tr>
+
+         </table>
+         
+    </center>
+    
+</body>
+</html>
