@@ -48,7 +48,7 @@ dbCon.connect(function (err) {
   if (err == null)
     console.log("Connected Successfully");
   else
-    console.error("Connection Error:", err); // Log error to the console
+    console.error("Connection Error:", err); // Log error to the console
 });
 
 //======================Email Checker===========
